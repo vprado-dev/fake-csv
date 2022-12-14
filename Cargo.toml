@@ -8,3 +8,5 @@ edition = "2021"
 [dependencies]
 csv = "1.1"
 serde = { version = "1", features = ["derive"] }
+fake = "2.5"
+rand = "0.8"

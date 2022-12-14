@@ -1,3 +1,5 @@
+use fake::locales::{EN};
+use fake::Fake;
 use std::error::Error;
 use std::process;
 use serde::Serialize;
@@ -11,16 +13,15 @@ struct Lead {
 fn write_to_stdout(path: &str) -> Result<(), Box<dyn Error>> {
     let mut writer = csv::Writer::from_path(path)?;
 
-    writer.serialize(Lead {
-        nome: "Ailey".to_string(),
-        email: "abenstead0@state.gov".to_string(),
-    })?;
+    use fake::faker::name::raw::*;
+    use fake::faker::internet::raw::*;
 
-    writer.serialize(Lead {
-        nome: "Ninnette".to_string(),
-        email: "nwasmuth1@washington.edu".to_string(),
-    })?;
-
+    for _ in 0..10000 {
+        writer.serialize(Lead {
+            nome: Name(EN).fake(),
+            email: SafeEmail(EN).fake(),
+        })?;
+    }
     writer.flush()?;
 
     Ok(())
