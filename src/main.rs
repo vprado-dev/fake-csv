@@ -10,7 +10,7 @@ struct Lead {
     email: String,
 }
 
-fn write_to_stdout(path: &str) -> Result<(), Box<dyn Error>> {
+fn write_csv_file(path: &str) -> Result<(), Box<dyn Error>> {
     let mut writer = csv::Writer::from_path(path)?;
 
     use fake::faker::name::raw::*;
@@ -27,7 +27,7 @@ fn write_to_stdout(path: &str) -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 fn main() {
-    if let Err(err) = write_to_stdout("teste.csv") {
+    if let Err(err) = write_csv_file("teste.csv") {
         println!("error running example: {}", err);
         process::exit(1);
     }
